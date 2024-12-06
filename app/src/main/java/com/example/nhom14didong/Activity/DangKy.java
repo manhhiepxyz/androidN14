@@ -8,11 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.nhom14didong.R;
 
@@ -25,7 +21,7 @@ import java.io.OutputStream;
 public class DangKy extends AppCompatActivity {
     String DB_PATH_SUFFIX = "/databases/";
     SQLiteDatabase database=null;
-    String DATABASE_NAME="QLThuVien1.db";
+    String DATABASE_NAME= "mydatabase.db";
     private EditText edtUsername, edtPassword;
     private Button btnDangKy;
 
