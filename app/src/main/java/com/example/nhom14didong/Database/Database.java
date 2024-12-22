@@ -10,13 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Database {
-    public static SQLiteDatabase initDatabase(Activity activity, String databaseName) {
+    private final static String DATABASE_NAME = "mydatabase.db";
+    public static SQLiteDatabase initDatabase(Activity activity) {
         try {
-            String outFileName = activity.getApplicationInfo().dataDir + "/databases/" + databaseName;
+            String outFileName = activity.getApplicationInfo().dataDir + "/databases/" +DATABASE_NAME;
             File f = new File(outFileName);
 
             if (!f.exists()) {
-                InputStream e = activity.getAssets().open(databaseName);
+                InputStream e = activity.getAssets().open(DATABASE_NAME);
                 File folder = new File(activity.getApplicationInfo().dataDir + "/databases/");
 
                 if (!folder.exists()) {
@@ -39,7 +40,7 @@ public class Database {
             e.printStackTrace();
         }
 
-        return activity.openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
+        return activity.openOrCreateDatabase(DATABASE_NAME, Context.MODE_PRIVATE, null);
     }
 
 }

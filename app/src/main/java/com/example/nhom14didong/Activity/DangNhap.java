@@ -30,7 +30,7 @@ public class DangNhap extends AppCompatActivity {
         dangnhap = findViewById(R.id.btnDangNhap);
         dangky = findViewById(R.id.btnDangKy);
         tvQMK = findViewById(R.id.tvQuenMatKhau);
-        db = Database.initDatabase(this, DATABASE_NAME);
+        db = Database.initDatabase(this);
         dangnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -8,6 +8,7 @@ import android.util.Log;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.nhom14didong.Database.Database;
 import com.example.nhom14didong.Model.User;
 
 import java.util.ArrayList;
@@ -15,23 +16,19 @@ import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
-    DatabaseHelper dbHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-       dbHelper = new DatabaseHelper(this);
-       SQLiteDatabase db = dbHelper.getWritableDatabase();//
-        List<User> userList = getAllUsers();
-        userList.forEach(
-                x -> System.out.println(x.toString())
-        );
+        setContentView(R.layout.activity_edit_user);
+
+
 
     }
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>();
-        SQLiteDatabase db = dbHelper.getReadableDatabase(); // Lấy cơ sở dữ liệu để đọc
+        SQLiteDatabase db = Database.initDatabase(this) ;// Lấy cơ sở dữ liệu để đọc
 
 
         Cursor cursor = db.query("NGUOIDUNG", null, null, null, null, null, null);
