@@ -71,7 +71,14 @@ public class EditUser extends AppCompatActivity {
             String fullName = edtFullName.getText().toString();
             String email = edtEmail.getText().toString();
             String role = spRole.getSelectedItem().toString();
-
+            if(fullName.equals("") || email.length()<3){
+                Toast.makeText(this, "Tên phải từ 3 ký tự", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!isValidEmail(email)) {
+                Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+                return;
+            }
             // Thực hiện cập nhật trong cơ sở dữ liệu
             SQLiteDatabase db = Database.initDatabase(this);
             ContentValues values = new ContentValues();
@@ -97,6 +104,10 @@ public class EditUser extends AppCompatActivity {
             spRole = findViewById(R.id.edtRole);
             btnSave = findViewById(R.id.btnSave);
         }
+    private boolean isValidEmail(String email) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
+    }
     }
 
 

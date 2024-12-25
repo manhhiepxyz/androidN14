@@ -75,6 +75,8 @@ public class DangNhap extends AppCompatActivity {
                 // Chuyển sang màn hình HomeActivity
                 // Intent intent = new Intent(DangNhap.this, HomeActivity.class);
                 // startActivity(intent);
+                Intent intent = new Intent(this,QuanLyUser.class);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Sai tên đăng nhập hoặc mật khẩu", Toast.LENGTH_SHORT).show();
             }

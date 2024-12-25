@@ -1,6 +1,7 @@
 package com.example.nhom14didong.Activity;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -66,6 +67,14 @@ public class AddUserActivity extends AppCompatActivity {
             Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (isUsernameExist(username)) {
+            Toast.makeText(this, "Tên tài khoản đã tồn tại", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!isValidEmail(email)) {
+            Toast.makeText(this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         SQLiteDatabase db = Database.initDatabase(this);
         ContentValues values = new ContentValues();
@@ -94,5 +103,25 @@ public class AddUserActivity extends AppCompatActivity {
         edtPassword = findViewById(R.id.edtPassword);
         spRole = findViewById(R.id.spRole);
         btnSave = findViewById(R.id.btnSave);
+    }
+    private boolean isValidEmail(String email) {
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        return email.matches(emailPattern);
+    }
+    private boolean isUsernameExist(String username) {
+        SQLiteDatabase db = Database.initDatabase(this);
+        Cursor cursor = db.query(
+                "NGUOIDUNG", // Tên bảng
+                new String[]{"USERNAME"}, // Cột cần truy vấn
+                "USERNAME = ?", // Điều kiện WHERE
+                new String[]{username}, // Giá trị thay thế ? trong điều kiện
+                null, // Nhóm điều kiện
+                null, // Điều kiện HAVING
+                null // Điều kiện sắp xếp
+        );
+
+        boolean exists = (cursor.getCount() > 0);
+        cursor.close();
+        return exists;
     }
 }
